@@ -28,8 +28,7 @@ def parseFile(input):
                     return line
                 
             file.close()
-parseFile('testfile.txt')
-parseFile("http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3.txt")
+
       
 def regEx(line):
     pat = re.compile(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*")
