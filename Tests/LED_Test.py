@@ -9,7 +9,7 @@ import pytest
 
 def testGrid():
     big = ledDisplay(2)
-    assert big.gridSize() == 2
+    assert big.gridSize() == 4
     assert big.count() == 0
 
 def testSwitch():

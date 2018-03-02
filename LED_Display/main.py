@@ -12,32 +12,24 @@ import os
 def parseFile(input):
     if input.startswith('http'):
         req = requests.get(input).text
-        if req is not None:
-            return True
-        else:
-            return False
+        #if req is not None:
+        #    return True
+        #else:
+        #    return False
         
     else:    
         if not os.path.isfile(input):
-            return False
-            #print(input,"does not exist")
+            #return False
+            print(input,"does not exist")
         else:
+            output = ''
             file = open(input, 'r')
             if file is not None:
-                for line in file.readlines():
-                    return line
-                
-            file.close()
-
-      
-def regEx(line):
-    pat = re.compile(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*")
-    m = pat.match(line)     
-    if m is not None:
-        return True
-    else:
-        return False
-    
+                #for line in file:
+                 #   output += line
+            #file.close()
+                return file
+        
 
 class ledDisplay():
     '''
@@ -51,16 +43,37 @@ class ledDisplay():
         self.lights = [[False]*size for i in range(size)]
     
     def gridSize(self):
-        return self.size
+        return self.size*self.size
         
     def grid(self):
         return self.lights
     
     def count(self):
         self.count = np.sum(self.lights)
+        on = self.count
+        off = self.size*self.size - self.count
+        print('There are', on, "lights on and", off,'lights off')
         return self.count
     
+    def apply(self, cmd):
+        
+        pat = re.compile(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*")
+        m = pat.match(cmd)
+        if m is not None:
+            print(m.group(1))
+            if m.group(1) == 'switch':
+                self.switch(m.group(2), m.group(3), m.group(4), m.group(5))
+            elif m.group(1) == 'turn on':
+                self.turnOn(m.group(2), m.group(3), m.group(4), m.group(5))
+            elif m.group(1) == 'turn off':
+                self.turnOff(m.group(2), m.group(3), m.group(4), m.group(5))
+            else:
+                pass
+    
+    
     def switch(self, startRow, startColumn, stopRow, stopColumn):
+        
+        startRow, startColumn, stopRow, stopColumn = int(startRow), int(startColumn), int(stopRow), int(stopColumn)
         
         for i in range(startRow, stopRow+1):
             for j in range(startColumn, stopColumn+1):
@@ -70,11 +83,17 @@ class ledDisplay():
                     self.lights[i][j] = False
     
     def turnOn(self, startRow, startColumn, stopRow, stopColumn):
+        
+        startRow, startColumn, stopRow, stopColumn = int(startRow), int(startColumn), int(stopRow), int(stopColumn)
+       
         for i in range(startRow, stopRow+1):
             for j in range(startColumn, stopColumn+1):
                 self.lights[i][j] = True
     
     def turnOff(self, startRow, startColumn, stopRow, stopColumn):
+        
+        startRow, startColumn, stopRow, stopColumn = int(startRow), int(startColumn), int(stopRow), int(stopColumn)
+        
         for i in range(startRow, stopRow+1):
             for j in range(startColumn, stopColumn+1):
                 self.lights[i][j] = False
