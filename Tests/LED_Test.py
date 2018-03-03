@@ -1,7 +1,7 @@
 '''
 Created on 1 Mar 2018
 
-@author: HP
+@author: Amy
 '''
 
 from LED_Display.main import *
