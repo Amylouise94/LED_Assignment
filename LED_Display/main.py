@@ -22,12 +22,8 @@ def parseFile(input):
             #return False
             print(input,"does not exist")
         else:
-            output = ''
             file = open(input, 'r')
             if file is not None:
-                #for line in file:
-                 #   output += line
-            #file.close()
                 return file
         
 
@@ -60,7 +56,6 @@ class ledDisplay():
         pat = re.compile(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*")
         m = pat.match(cmd)
         if m is not None:
-            print(m.group(1))
             if m.group(1) == 'switch':
                 self.switch(m.group(2), m.group(3), m.group(4), m.group(5))
             elif m.group(1) == 'turn on':
@@ -75,6 +70,11 @@ class ledDisplay():
         
         startRow, startColumn, stopRow, stopColumn = int(startRow), int(startColumn), int(stopRow), int(stopColumn)
         
+        self.checkRange(startRow)
+        self.checkRange(startColumn)
+        self.checkRange(stopRow)
+        self.checkRange(stopColumn)
+        
         for i in range(startRow, stopRow+1):
             for j in range(startColumn, stopColumn+1):
                 if self.lights[i][j] == False:
@@ -86,6 +86,11 @@ class ledDisplay():
         
         startRow, startColumn, stopRow, stopColumn = int(startRow), int(startColumn), int(stopRow), int(stopColumn)
        
+        self.checkRange(startRow)
+        self.checkRange(startColumn)
+        self.checkRange(stopRow)
+        self.checkRange(stopColumn)
+       
         for i in range(startRow, stopRow+1):
             for j in range(startColumn, stopColumn+1):
                 self.lights[i][j] = True
@@ -93,8 +98,24 @@ class ledDisplay():
     def turnOff(self, startRow, startColumn, stopRow, stopColumn):
         
         startRow, startColumn, stopRow, stopColumn = int(startRow), int(startColumn), int(stopRow), int(stopColumn)
+       
+        self.checkRange(startRow)
+        self.checkRange(startColumn)
+        self.checkRange(stopRow)
+        self.checkRange(stopColumn)
         
         for i in range(startRow, stopRow+1):
             for j in range(startColumn, stopColumn+1):
                 self.lights[i][j] = False
+    
+    def checkRange(self, num):
+        if 0 <= num < self.gridSize():
+            return num
+        
+        elif 0 > num:
+            return 0
+        
+        else:
+            ans = self.gridSize() -1
+            return ans
     

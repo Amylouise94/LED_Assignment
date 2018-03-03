@@ -44,11 +44,17 @@ def testParse():
     assert parseFile("http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3.txt") == True
     assert parseFile('testfile.txt') == 'This is a testfile'
 
+def testRange():
+    grid = ledDisplay(10)
+    assert grid.checkRange(110) == 99
+    assert grid.checkRange(56) == 56
+    assert grid.checkRange(-2) == 0
 
 if __name__ == '__main__':
     testGrid()
     testSwitch()
     testTurnOn()
     testTurnOff()
-    testRegEx()
-    testParse()
+    #testRegEx()
+    #testParse()
+    testRange()
