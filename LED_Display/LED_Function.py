@@ -6,12 +6,17 @@ Created on 2 Mar 2018
 
 from main import *
 import urllib.request
+import click
 
-def getGridSize(filename):
+@click.command()
+@click.option("--input", default=None, help="input URI (file or URL)")
+def main(input=None):
     
-    if filename.startswith('http'):
+    print("input", input)
+    
+    if input.startswith('http'):
         
-        req = urllib.request.urlopen(filename)
+        req = urllib.request.urlopen(input)
         buffer = req.read().decode('utf-8')
         file = (buffer.split('\n'))
         
@@ -27,12 +32,12 @@ def getGridSize(filename):
         line = int(line)
     
     else:
-        with open(filename) as f:
+        with open(input) as f:
             line = f.readline()
         line = int(line)
     
     
-    displayLED(line, filename)
+    displayLED(line, input)
 
 
 def displayLED(N, filename):
@@ -49,4 +54,4 @@ def displayLED(N, filename):
     
     
 if __name__ == '__main__':
-    getGridSize('http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3_b.txt')
+    main()

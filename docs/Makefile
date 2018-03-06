@@ -8,8 +8,8 @@ PAPER         =
 BUILDDIR      = _build
 AUTODOCDIR    = api
 AUTODOCBUILD  = sphinx-apidoc
-PROJECT       = LED_Display_Assignment
-MODULEDIR     = ../src/led_display_assignment
+PROJECT       = LED_Assignment
+MODULEDIR     = ../LED_Assignment
 
 # User-friendly check for sphinx-build
 ifeq ($(shell which $(SPHINXBUILD) >/dev/null 2>&1; echo $?), 1)

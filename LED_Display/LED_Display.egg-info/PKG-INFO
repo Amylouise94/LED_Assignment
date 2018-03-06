@@ -1,0 +1,32 @@
+Metadata-Version: 1.1
+Name: LED-Display
+Version: 0.1
+Summary: LED Assignment
+Home-page:  
+Author: Amy McCormack
+Author-email: amy.mccormack@ucdconnect.ie
+License: GPL3
+Description-Content-Type: UNKNOWN
+Description: ======================
+        LED_Display_Assignment
+        ======================
+        
+        
+        Add a short description here!
+        
+        
+        Description
+        ===========
+        
+        A longer description of your project goes here...
+        
+        
+        Note
+        ====
+        
+        This project has been set up using PyScaffold 3.0.1. For details and usage
+        information on PyScaffold see http://pyscaffold.org/.
+        
+Platform: any
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python
