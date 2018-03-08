@@ -1,3 +1,0 @@
-[console_scripts]
-solve_led = LED_Function:main
-

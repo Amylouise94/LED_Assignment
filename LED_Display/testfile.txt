@@ -1,3 +1,0 @@
-7
-turn on 3,3 through 5,5
-switch 0,3 through 3,4
