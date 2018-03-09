@@ -4,7 +4,7 @@ Created on 2 Mar 2018
 @author: Amy
 '''
 
-from Display.main import *
+from LED_Display.main import *
 import urllib.request
 import click
 
