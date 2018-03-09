@@ -21,10 +21,12 @@ def parseFile(filename):
     else:    
         if not os.path.isfile(filename):
             print(filename,"does not exist")
+            return False
         
         else:
             file = open(filename, 'r')
             if file is not None:
+                print(file)
                 return file
         
 

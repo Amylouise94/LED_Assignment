@@ -1,0 +1,3 @@
+[console_scripts]
+solve_led = LED_Display.LED_Function:main
+

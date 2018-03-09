@@ -33,21 +33,30 @@ def testTurnOff():
     grid.turnOff(0, 1, 0, 4)
     assert grid.count() == 17
 
-def testRegEx():
-    string = "switcy 166,675 through 329,961"
-    assert regEx(string) == False
-    string2 = "switch 166,675 through 329,961"
-    assert regEx(string2) == True
+def testApply():
+    grid = ledDisplay(10)
+    string = "switcy 6,8 through 2,9"
+    grid.apply(string)
+    
+    string2 = "switch 6,8 through 9,9"
+    grid.apply(string2)
+    
+    string3 = "turn on 1,1 through 3,4"
+    grid.apply(string3)
+    
+    string3 = "turnb off 1,1 through 3,4"
+    grid.apply(string3)
+    
+    assert grid.count() == 20
     
 def testParse():
     assert parseFile('ttestfile.txt') == False
-    assert parseFile("http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3.txt") == True
-    assert parseFile('testfile.txt') == 'This is a testfile'
+    assert parseFile("http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3.txt")[:1] == ['1000'] 
 
 def testRange():
     grid = ledDisplay(10)
-    assert grid.checkRange(110) == 99
-    assert grid.checkRange(56) == 56
+    assert grid.checkRange(11) == 9
+    assert grid.checkRange(5) == 5
     assert grid.checkRange(-2) == 0
 
 if __name__ == '__main__':
@@ -55,6 +64,6 @@ if __name__ == '__main__':
     testSwitch()
     testTurnOn()
     testTurnOff()
-    #testRegEx()
-    #testParse()
+    testApply()
+    testParse()
     testRange()

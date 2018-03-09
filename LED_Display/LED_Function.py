@@ -32,9 +32,13 @@ def main(input=None):
         line = int(line)
     
     else:
-        with open(input) as f:
-            line = f.readline()
-        line = int(line)
+        if not os.path.isfile(input):
+            print(input,"does not exist")
+        
+        else:
+            with open(input) as f:
+                line = f.readline()
+                line = int(line)
     
     
     displayLED(line, input)
